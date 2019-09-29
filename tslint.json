@@ -1,8 +1,9 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended"
-  ],
+  "extends": ["tslint:recommended"],
+  "linterOptions": {
+    "exclude": ["node_modules/**"]
+  },
   "jsRules": {},
   "rules": {
     // 允许使用 console
@@ -11,62 +12,64 @@
     // 代码块的内容不能为空，禁止空代码块
     "no-empty": true,
 
+    "no-var-requires": false,
+
+    "no-string-literal": false,
+
     // 单引号
     "quotemark": false,
 
-    // 不加分号
-    "semicolon": [
-      true,
-      "never"
-    ],
+    "one-variable-per-declaration": false,
+
+    // 加分号
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
 
     // 如果一个变量声明后不再被修改，那么应使用 const 来声明该变量
     "prefer-const": true,
 
     // 设置成员对象的访问权限（public,private,protect)
-    "member-access": true,
-    
+    "member-access": [true, "no-public"],
+
+    "interface-over-type-literal": false,
+
     // 设置修饰符顺序
     "member-ordering": [
       true,
       {
-      "order": [
-          "public-static-field",
-          "public-static-method",
-          "protected-static-field",
-          "protected-static-method",
+        "order": [
           "private-static-field",
           "private-static-method",
-          "public-instance-field",
-          "protected-instance-field",
+          "protected-static-field",
+          "protected-static-method",
+          "public-static-field",
+          "public-static-method",
           "private-instance-field",
-          "public-constructor",
-          "protected-constructor",
+          "protected-instance-field",
+          "public-instance-field",
           "private-constructor",
-          "public-instance-method",
+          "protected-constructor",
+          "public-constructor",
+          "private-instance-method",
           "protected-instance-method",
-          "private-instance-method"
+          "public-instance-method"
         ]
       }
     ],
 
     // 不允许空接口
-    "no-empty-interface": true,
+    "no-empty-interface": false,
 
     // 不允许修改方法输入参数
-    "no-parameter-reassignment": true,
+    "no-parameter-reassignment": false,
 
     // 如果for循环中没有使用索引，建议是使用for-of
-    "prefer-for-of": true,
+    "prefer-for-of": false,
 
     // 不允许没有Promise的情况下使用await
     "await-promise": true,
 
     // if/for/do/while强制使用大括号 同行除外
-    "curly": [
-      true,
-      "ignore-same-line"
-    ],
+    "curly": [true, "ignore-same-line"],
 
     // f使用for in语句时，强制进行hasOwnProperty检查
     "forin": true,
@@ -95,11 +98,8 @@
     // 只允许在模板字符串中使用${
     "no-invalid-template-strings": true,
 
-    // 不允许在class之外使用this
-    "no-invalid-this": true,
-
     // 不允许使用null,使用undefined代替null，指代空指针对象
-    "no-null-keyword": true,
+    // "no-null-keyword": true,
 
     // 不允许 array 中有空元素
     "no-sparse-arrays": true,
@@ -111,7 +111,7 @@
     "no-unsafe-finally": true,
 
     // 不允许使用未使用的表达式
-    "no-unused-expression": true,
+    "no-unused-expression": false,
 
     // 在使用前必须声明
     "no-use-before-declare": true,
@@ -143,14 +143,11 @@
     // 定义注释格式
     "comment-format": [true, "check-space"],
 
-    // 定义编码格式默认utf-8
-    "encoding": true,
-
     // import关键字后加空格
     "import-spacing": true,
 
     // interface必须以I开头
-    "interface-name": [true, "always-prefix"],
+    "interface-name": false,
 
     // 注释基于jsdoc风格
     "jsdoc-format": true,
@@ -159,7 +156,18 @@
     "new-parens": true,
 
     // 不允许有空行
-    "no-consecutive-blank-lines": [true,2],
+    "no-consecutive-blank-lines": [true, 2],
+
+    "whitespace": [
+      false,
+      "check-branch",
+      // "check-decl",
+      "check-module",
+      "check-separator",
+      "check-rest-spread",
+      "check-type",
+      "check-type-operator"
+    ],
 
     // 不允许空格结尾
     "no-trailing-whitespace": true,
@@ -168,13 +176,14 @@
     "no-unnecessary-initializer": true,
 
     // 定义变量命名规则
-    // "variable-name": [
-    //   true,
-    //   "check-format",
-    //   "allow-leading-underscore",
-    //   "allow-trailing-underscore",
-    //   "ban-keywords"
-    // ],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-leading-underscore",
+      "allow-trailing-underscore",
+      "allow-pascal-case",
+      "ban-keywords"
+    ],
 
     // 句尾逗号
     "trailing-comma": [
@@ -185,20 +194,20 @@
       }
     ],
 
+    "max-classes-per-file": false,
+
     // 不允许case段落中在没有使用breack的情况下，在新启一段case逻辑
     "no-switch-case-fall-through": true,
 
-    "one-line": [
-      true,
-      "check-open-brace",
-      "check-whitespace"
-    ],
+    "no-angle-bracket-type-assertion": false,
+
+    "one-line": [false],
 
     // 可以对象字面量断言
     "no-object-literal-type-assertion": false,
 
     // function paren 前需要有空格
-    "space-before-function-paren": true,
+    "space-before-function-paren": false,
 
     // 可以导入子包
     "no-submodule-imports": false,
@@ -214,19 +223,13 @@
     "object-literal-sort-keys": false,
 
     // 允许带一个参数的箭头函数省去括号
-    "arrow-parens": [
-      true,
-      "ban-single-arg-parens"
-    ],
+    "arrow-parens": [true, "ban-single-arg-parens"],
 
     // 对齐方式
-    "align": [
-      true,
-      "parameters",
-      "statements",
-      "members",
-      "elements"
-    ]
+    "align": false,
+
+    // 允许使用 namespace
+    "no-namespace": false
   },
   "rulesDirectory": []
 }
